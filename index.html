@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+
+<head>
+
+  <meta charset="UTF-8"/>
+  <meta name="description" content="Online Text Editor"/>
+  
+<title>Online Text Editor</title>
+
+  <style>
+/* Body style */
+    
+body {
+      font-family: 'Times New Roman';
+      background-color: lightgray;
+      
+    }
+
+ /* Toolbar style */
+       
+.menu {
+	background: yellow;
+	margin: 40px ;
+	padding: 25px;
+	align-items: center;
+	gap:100px;
+	height:150px;
+	width:750px;
+	border:5px;
+}
+.menu button {
+	background: blue;
+	align-items: center;
+	height:70px;
+	width:70px;
+    }
+        
+.menu input[type="color"] {   
+	border:5px;
+	background: black;
+	margin: 4px;
+    }
+
+/* Editor area style */
+
+#editor {
+      height: 300px;
+      margin: 40px ;
+      width: 750px;
+      background:lightblue;
+      border: 5px solid black;
+      font-size: 20px;
+      padding: 32px;
+      
+}
+     </style>
+</head>
+<body>
+  <div class="editor">
+    <div class="menu">
+      <h1>EasyEdit</h1>
+
+<!-- Button for text formatting-->
+
+      <button type="button" title="Bold" onclick="format('bold')">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/bold.png" alt="Bold"/>
+      </button>
+
+      <button type="button" title="Italic" onclick="format('italic')">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/italic.png" alt="Italic"/>
+      </button>
+
+      <button type="button" title="Underline" onclick="format('underline')">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/underline.png" alt="Underline"/>
+      </button>
+
+<!-- font color-->
+
+      <input type="color" title="Font Color" onchange="changeColor(this.value)">
+	
+	<!-- Text Alignment-->
+      <button type="button" title="Align Left" onclick="alignText('justifyLeft')">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/align-left.png" alt="Align Left"/>
+      </button>
+
+      <button type="button" title="Align Center" onclick="alignText('justifyCenter')">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/align-center.png" alt="Align Center"/>
+      </button>
+
+      <button type="button" title="Align Right" onclick="alignText('justifyRight')">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/align-right.png" alt="Align Right"/>
+      </button>
+
+      <button type="button" title="Justify" onclick="alignText('justifyFull')">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/align-justify.png" alt="Justify"/>
+      </button>
+
+<!-- undo and redo--> 
+      <button type="button" title="Undo" onclick="format('undo')">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/undo.png" alt="Undo"/>
+      </button>
+
+      <button type="button" title="Redo" onclick="format('redo')">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/redo.png" alt="Redo"/>
+      </button>
+
+    </div>
+<!-- Text edit area-->
+
+    <div id="editor" contenteditable="true" spellcheck="true" aria-label="Text editor"></div>
+  </div>
+
+  <script>
+
+function format(command,value=null){
+	if (command==='underline'){
+
+// underline formatting
+		document.execCommand('underline',false,value);
+	} else { 
+		document.execCommand(command,false,value);
+	}
+	document.getElementById('editor').focus();
+	}
+	
+// change font color
+function changeColor(color){
+	format('foreColor',color);
+}
+
+//alignment function
+function alignText(command){
+	document.execCommand(command,false,null);
+	document.getElementById('editor').focus();
+}
+    
+  </script>
+
+</body>
+
+</html>
